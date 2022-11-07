@@ -61,7 +61,15 @@ int equal(const int arrayFirst[], const unsigned int sizeFirst,
           const int arraySecond[], const unsigned int sizeSecond)
 {
     int equal = 1;
-    for (int i = 0; i < sizeFirst; i++) {
-        for (int j = 0; j < sizeSecond)
-            ;
+    if (sizeFirst == sizeSecond) {
+        for (int i = 0; i < sizeFirst; i++) {
+            if (arrayFirst[i] != arraySecond[i]) {   
+                equal = 0;
+                break;
+            }
+        }    
+    } else {
+        equal = 0;
     }
+    return equal;
+}    
