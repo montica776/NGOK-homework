@@ -4,7 +4,7 @@
 
 void fill_array(int *array, const unsigned int size)
 {
-    for (int i = 0; i < size; i++) {
+    for (unsigned int i = 0; i < size; i++) {
         scanf("%d", array + i);
         setbuf(stdin, NULL);
     }
@@ -13,7 +13,7 @@ void fill_array(int *array, const unsigned int size)
 void print_array(const int array[], const unsigned int size)
 {
 
-    for (int i = 0; i < size; i++) {
+    for (unsigned int i = 0; i < size; i++) {
         printf(" %d ", array[i]);
     }
 }
@@ -21,29 +21,57 @@ void print_array(const int array[], const unsigned int size)
 int search_max(const int array[], const unsigned int size)
 {
     int max = array[0];
-    for (int i = 0; i < size; i++) {
-        if (max > array[i])
+    for (unsigned int i = 0; i < size; i++) {
+        if (max < array[i]) {
+            max = array[i];
+        }
     }
     return max;
 }
-
 int search_index(const int array[], const unsigned int size, const int number)
 {
-    // код
+    int index = 0;
+    for (unsigned int i = 0; i < size; i++) {
+        if (array[i] == number) {
+            index = i;
+        }
+    }
+    return index;
 }
 
 int search_min(const int array[], const unsigned int size)
 {
-    // код
+    int min = array[0];
+    for (unsigned int i = 0; i < size - 1; i++) {
+        if (min > array[i]) {
+            min = array[i];
+        }
+    }
+    return min;
 }
-
 void reverse_array(int *array, const unsigned int size)
 {
-    // код
+    int tmp = array[0];
+    for (unsigned int i = 0, j = size - 1; i < size / 2; ++i, --j) {
+        array[i] = array[j];
+        array[j] = tmp;
+        tmp = array[i + 1];
+    }
 }
 
 int equal(const int arrayFirst[], const unsigned int sizeFirst,
           const int arraySecond[], const unsigned int sizeSecond)
 {
-    // код
+    int equal = 1;
+    if (sizeFirst == sizeSecond) {
+        for (unsigned int i = 0; i < sizeFirst; i++) {
+            if (arrayFirst[i] != arraySecond[i]) {
+                equal = 0;
+                break;
+            }
+        }
+    } else {
+        equal = 0;
+    }
+    return equal;
 }
