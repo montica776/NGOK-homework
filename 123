@@ -1,0 +1,134 @@
+CC = gcc 
+FLAGS = -Wall - Werror -Wextra
+
+all: array
+
+array:
+	@${CC} main.c array.c -o array
+
+clean:
+	@rm -rf *.out array
+
+run:
+	@./array
+
+rebuild: clean array#include "array.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+void fill_array(int *array, const unsigned int size)
+{
+    for (unsigned int i = 0; i < size; i++) {
+        scanf("%d", array + i);
+        setbuf(stdin, NULL);
+    }
+}
+
+void print_array(const int array[], const unsigned int size)
+{
+
+    for (unsigned int i = 0; i < size; i++) {
+        printf(" %d ", array[i]);
+    }
+}
+
+int search_max(const int array[], const unsigned int size)
+{
+    int max = array[0];
+    for (unsigned int i = 0; i < size; i++) {
+        if (max < array[i]) {
+            max = array[i];
+        }
+    }
+    return max;
+}
+int search_index(const int array[], const unsigned int size, const int number)
+{
+    int index = 0;
+    for (unsigned int i = 0; i < size; i++) {
+        if (array[i] == number) {
+            index = i;
+        }
+    }
+    return index;
+}
+
+int search_min(const int array[], const unsigned int size)
+{
+    int min = array[0];
+    for (unsigned int i = 0; i < size - 1; i++) {
+        if (min > array[i]) {
+            min = array[i];
+        }
+    }
+    return min;
+}
+void reverse_array(int *array, const unsigned int size)
+{
+    int tmp = array[0];
+    for (unsigned int i = 0, j = size - 1; i < size / 2; ++i, --j) {
+        array[i] = array[j];
+        array[j] = tmp;
+        tmp = array[i + 1];
+    }
+}
+
+int equal(const int arrayFirst[], const unsigned int sizeFirst,
+          const int arraySecond[], const unsigned int sizeSecond)
+{
+    int equal = 1;
+    if (sizeFirst == sizeSecond) {
+        for (unsigned int i = 0; i < sizeFirst; i++) {
+            if (arrayFirst[i] != arraySecond[i]) {
+                equal = 0;
+                break;
+            }
+        }
+    } else {#ifndef _ARRAY_H_
+#define _ARRAY_H_
+// заполнение массива с клавиатуры
+void fill_array(int *array, const unsigned int size);
+//ввод массива в терминал
+void print_array(const int array[], const unsigned int size);
+//нахождение максимального значения элемента
+int search_max(const int array[], const unsigned int size);
+//нахождение минимального значения элемента
+int search_min(const int array[], const unsigned int size);
+//изменить массив в обратный порядок
+void reverse_array(int *array, const unsigned int size);
+//поиск значения в массиве(возвращает индекс или 0)#include "array.h"
+#include <stdio.h>
+
+#define SIZE_1 10
+#define SIZE_2 10
+#define FIND 5
+
+int main()
+{
+    int a[SIZE_1] = {0};
+    fill_array(a, SIZE_1);
+    print_array(a, SIZE_1);
+
+    int max = search_max(a, SIZE_1);
+    int min = search_min(a, SIZE_1);
+
+    reverse_array(a, SIZE_1);
+
+    int index = search_index(a, SIZE_1, FIND);
+
+    int b[SIZE_2] = {0};
+
+    int eq = equal(a, SIZE_1, b, SIZE_2);
+
+    printf("\nmax = %d min = %d index[%d] = %d eq = %d\n", max, min, FIND,
+           index, eq);
+}
+int search_index(const int array[], const unsigned int size, const int number);
+//функция сравнения двух массивов(возвращает 1 или 0)
+int equal(const int arrayFirst[], const unsigned int sizeFirst,
+          const int arraySecond[], const unsigned int sizeSecond);
+#endif // _ARRAY_H_
+        equal = 0;
+    }
+    return equal;
+}
